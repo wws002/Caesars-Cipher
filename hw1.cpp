@@ -16,6 +16,21 @@ string createEncryption(string plainText, int key){
   return plainText;
 }
 
+string createDecryption(string cipherText, int key){
+  for(int i = 0; i < cipherText.size(); i++){
+    if(cipherText[i] == ' '){
+      cipherText[i] = cipherText[i];
+    }
+    else if(cipherText[i] - key < 'a'){
+      cipherText[i] = cipherText[i] - key + 26;
+    }
+    else{
+      cipherText[i] = cipherText[i] - key;
+    }
+  }
+  return cipherText;
+}
+
 int main(){
     while(true){
       cout<<"encrypt(e) or decrypt(d) or quit(q)? ";
@@ -42,6 +57,15 @@ int main(){
         int key; cin>>key;
         string cipherText = createEncryption(encryption, key);
         cout<<cipherText<<endl;
+      }
+
+      if(choice == "d"){
+        cout<<"enter string to decrypt: ";
+        string cipherText; getline(cin, cipherText); getline(cin, cipherText);
+        cout<<"enter key: ";
+        int key; cin>>key;
+        string plainText = createDecryption(cipherText, key);
+        cout<<plainText<<endl;
       }
     }
 
